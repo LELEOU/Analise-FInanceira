@@ -19,8 +19,23 @@ echo "=== Navigating to project ==="
 if [ -d "flutter_app" ]; then
   echo "Found flutter_app directory, entering..."
   cd flutter_app
-  pwd
+  echo "Current directory after cd: $(pwd)"
+  echo "Contents of flutter_app:"
   ls -la
+  
+  if [ ! -d "lib" ]; then
+    echo "ERROR: lib/ directory not found!"
+    exit 1
+  fi
+  
+  if [ ! -f "lib/main.dart" ]; then
+    echo "ERROR: lib/main.dart not found!"
+    echo "Contents of lib/:"
+    ls -la lib/ 2>&1 || echo "lib/ doesn't exist"
+    exit 1
+  fi
+  
+  echo "lib/main.dart exists, proceeding..."
 elif [ -f "pubspec.yaml" ]; then
   echo "Already in Flutter project directory"
 else
