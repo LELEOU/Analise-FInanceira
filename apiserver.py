@@ -35,9 +35,16 @@ def index():
     return jsonify({
         'name': 'Financial Analyzer API',
         'version': '1.0.0',
+        'status': 'running',
         'endpoints': {
+            '/': 'GET - Info da API',
+            '/api/health': 'GET - Verificar saúde da API',
             '/api/analyze': 'POST - Analisar transações',
-            '/api/health': 'GET - Verificar saúde da API'
+            '/api/chat': 'POST - Chat com IA',
+            '/api/chat/insights': 'GET - Insights rápidos',
+            '/api/chat/optimize': 'GET - Otimizar orçamento',
+            '/api/chat/history': 'GET - Histórico do chat',
+            '/api/chat/clear': 'POST - Limpar histórico'
         }
     }), 200
 
