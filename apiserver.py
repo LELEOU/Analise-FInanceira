@@ -14,7 +14,13 @@ from main_handler import process_transactions_dict
 from financial_chat import FinancialChatAssistant
 
 # Configurar Flask para servir arquivos estáticos do Flutter
-app = Flask(__name__, static_folder='flutter_app/web', static_url_path='')
+# Usar build/web (gerado pelo flutter build web) ou web (fallback)
+import os
+flutter_build_path = os.path.join(os.path.dirname(__file__), 'flutter_app', 'build', 'web')
+flutter_web_path = os.path.join(os.path.dirname(__file__), 'flutter_app', 'web')
+static_folder = flutter_build_path if os.path.exists(flutter_build_path) else flutter_web_path
+
+app = Flask(__name__, static_folder=static_folder, static_url_path='')
 
 # Instância global do chat assistant (em produção, usar sessões/banco de dados)
 chat_assistant = FinancialChatAssistant()
