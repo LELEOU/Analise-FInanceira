@@ -6,10 +6,15 @@ export PATH="$PATH:$PWD/flutter/bin"
 
 echo "🔧 Configuring Flutter..."
 flutter config --no-analytics
-flutter doctor
+
+echo "📂 Current directory: $PWD"
+ls -la
 
 echo "🏗️ Building Flutter Web..."
 cd flutter_app
+echo "📂 Now in: $PWD"
+ls -la
+
 flutter pub get
 flutter build web --release
 
