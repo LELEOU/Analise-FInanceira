@@ -5,7 +5,7 @@ import os
 from typing import Set
 
 # API Configuration
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyAFADj7IfqAXRTMw9VCQp_cMiN_xQFYML8")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")  # Configure via environment variable
 GEMINI_MODEL = "gemini-2.5-flash"  # Gemini 2.5 Flash - mais recente e disponível
 GEMINI_TIMEOUT = 10  # segundos
 
