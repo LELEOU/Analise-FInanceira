@@ -1,38 +1,139 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
-
+  <base href="/">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Financial Analyzer - Análise Financeira com IA">
+  
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="financial_analyzer">
+  <meta name="apple-mobile-web-app-title" content="Financial Analyzer">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>financial_analyzer</title>
+  
+  <title>Financial Analyzer</title>
   <link rel="manifest" href="manifest.json">
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 500px;
+      text-align: center;
+    }
+    
+    h1 {
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+    
+    .status {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f0f4ff;
+      border-radius: 10px;
+      border-left: 4px solid #667eea;
+    }
+    
+    .endpoint {
+      text-align: left;
+      padding: 10px;
+      margin: 10px 0;
+      background: #f8f9fa;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+    
+    .method {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 12px;
+      margin-right: 8px;
+    }
+    
+    .get { background: #28a745; color: white; }
+    .post { background: #007bff; color: white; }
+    
+    .info-box {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    
+    .success { color: #28a745; font-weight: bold; }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <div class="container">
+    <h1>💰 Financial Analyzer API</h1>
+    
+    <div class="status">
+      <p class="success">✅ Servidor Rodando</p>
+      <p>Versão: <strong>1.0.0</strong></p>
+    </div>
+    
+    <h3>📡 Endpoints Disponíveis:</h3>
+    
+    <div class="endpoint">
+      <span class="method get">GET</span>
+      <code>/api/health</code>
+    </div>
+    
+    <div class="endpoint">
+      <span class="method post">POST</span>
+      <code>/api/analyze</code>
+    </div>
+    
+    <div class="endpoint">
+      <span class="method post">POST</span>
+      <code>/api/chat</code>
+    </div>
+    
+    <div class="endpoint">
+      <span class="method get">GET</span>
+      <code>/api/chat/insights</code>
+    </div>
+    
+    <div class="endpoint">
+      <span class="method get">GET</span>
+      <code>/api/chat/optimize</code>
+    </div>
+    
+    <div class="endpoint">
+      <span class="method get">GET</span>
+      <code>/api/chat/history</code>
+    </div>
+    
+    <div class="endpoint">
+      <span class="method post">POST</span>
+      <code>/api/chat/clear</code>
+    </div>
+    
+    <div class="info-box">
+      <p><strong>ℹ️ Nota:</strong> Esta é a API backend.</p>
+      <p>Para usar o frontend completo, rode localmente:<br>
+      <code>flutter run -d chrome</code></p>
+    </div>
+  </div>
 </body>
 </html>

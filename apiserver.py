@@ -37,32 +37,16 @@ CORS(app, resources={
 
 
 @app.route('/')
-def serve_frontend():
-    """Servir o frontend Flutter."""
-    return send_from_directory(app.static_folder, 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    """Servir arquivos estáticos do Flutter."""
-    if path.startswith('api/'):
-        # Se for rota da API, deixar passar para os endpoints abaixo
-        return None
-    try:
-        return send_from_directory(app.static_folder, path)
-    except:
-        # Se arquivo não existir, retornar index.html (SPA routing)
-        return send_from_directory(app.static_folder, 'index.html')
-
-@app.route('/api/info', methods=['GET'])
-def api_info():
+def index():
     """Informações da API."""
     return jsonify({
         'name': 'Financial Analyzer API',
         'version': '1.0.0',
         'status': 'running',
+        'message': 'API funcionando! Para usar o frontend, rode o Flutter localmente com: flutter run -d chrome',
+        'api_url': 'Configure FLUTTER_API_URL para esta URL no seu app Flutter',
         'endpoints': {
-            '/': 'GET - Frontend Flutter',
-            '/api/info': 'GET - Info da API',
+            '/': 'GET - Info da API',
             '/api/health': 'GET - Verificar saúde da API',
             '/api/analyze': 'POST - Analisar transações',
             '/api/chat': 'POST - Chat com IA',
