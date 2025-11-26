@@ -266,7 +266,7 @@ def clear_chat_history():
 if __name__ == '__main__':
     # Configurações
     host = os.getenv('HOST', '0.0.0.0')
-    port = int(os.getenv('PORT', 5000))
+    port = int(os.getenv('PORT', 80))  # Porta 80 para HTTP
     debug = os.getenv('DEBUG', 'True').lower() == 'true'
     
     banner = f"""
