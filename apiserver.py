@@ -2,7 +2,7 @@
 Servidor Flask para API REST de análise de transações.
 Para uso em desenvolvimento e produção.
 """
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import sys
 import os
@@ -13,7 +13,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 from main_handler import process_transactions_dict
 from financial_chat import FinancialChatAssistant
 
-app = Flask(__name__)
+# Configurar Flask para servir arquivos estáticos do Flutter
+app = Flask(__name__, static_folder='flutter_app/web', static_url_path='')
 
 # Instância global do chat assistant (em produção, usar sessões/banco de dados)
 chat_assistant = FinancialChatAssistant()
@@ -29,15 +30,33 @@ CORS(app, resources={
 })
 
 
-@app.route('/', methods=['GET'])
-def index():
-    """Rota raiz com informações da API."""
+@app.route('/')
+def serve_frontend():
+    """Servir o frontend Flutter."""
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    """Servir arquivos estáticos do Flutter."""
+    if path.startswith('api/'):
+        # Se for rota da API, deixar passar para os endpoints abaixo
+        return None
+    try:
+        return send_from_directory(app.static_folder, path)
+    except:
+        # Se arquivo não existir, retornar index.html (SPA routing)
+        return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/api/info', methods=['GET'])
+def api_info():
+    """Informações da API."""
     return jsonify({
         'name': 'Financial Analyzer API',
         'version': '1.0.0',
         'status': 'running',
         'endpoints': {
-            '/': 'GET - Info da API',
+            '/': 'GET - Frontend Flutter',
+            '/api/info': 'GET - Info da API',
             '/api/health': 'GET - Verificar saúde da API',
             '/api/analyze': 'POST - Analisar transações',
             '/api/chat': 'POST - Chat com IA',
