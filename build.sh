@@ -1,21 +1,24 @@
 #!/bin/bash
 set -e
 
-echo "📦 Setting up Flutter..."
+# Setup Flutter
 export PATH="$PATH:$PWD/flutter/bin"
+flutter config --no-analytics --no-cli-animations
 
-echo "🔧 Configuring Flutter..."
-flutter config --no-analytics
+# Navigate to flutter_app
+if [ -d "flutter_app" ]; then
+  cd flutter_app
+elif [ -f "pubspec.yaml" ]; then
+  echo "Already in Flutter project directory"
+else
+  echo "Error: Cannot find Flutter project"
+  ls -la
+  exit 1
+fi
 
-echo "📂 Current directory: $PWD"
-ls -la
-
-echo "🏗️ Building Flutter Web..."
-cd flutter_app
-echo "📂 Now in: $PWD"
-ls -la
-
+# Build
 flutter pub get
-flutter build web --release
+flutter build web --release --verbose
 
-echo "✅ Build complete!"
+echo "Build complete!"
+ls -la build/web/
