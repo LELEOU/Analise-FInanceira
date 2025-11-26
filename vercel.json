@@ -1,10 +1,9 @@
 {
-  "buildCommand": "export PATH=\"$PATH:$PWD/flutter/bin\" && cd flutter_app && flutter config --no-analytics && flutter build web --release",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "flutter_app/build/web",
-  "installCommand": "git clone https://github.com/flutter/flutter.git -b stable --depth 1",
+  "installCommand": "git clone https://github.com/flutter/flutter.git -b stable --depth 1 && chmod +x build.sh",
   "framework": null,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
